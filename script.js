@@ -1,4 +1,5 @@
 const form = document.querySelector("form");
+const textInput = document.querySelector("form > input");
 const error = document.querySelector("p.error")
 const tableSpace = document.querySelector("div.output");
 
@@ -6,12 +7,13 @@ const table = (() => {
     let arraySet = [], input;
     form.addEventListener("submit", (e) => {
         e.preventDefault;
-        input = document.querySelector("form > input[type=text]").value;
-        console.log(input);//
-        convertArray(input);
+        console.log("User: " + textInput.value);//
+        convertArray(textInput.value);
         if(!isValid()) return;
+        updateText();
         console.log("It is valid!");//
     });
+    
     const convertArray = ((x) => {
         arraySet = x.split(",");
         for(let i = 0; i < arraySet.length; i++) { 
@@ -31,6 +33,10 @@ const table = (() => {
             return false;
         }
         return true;
+    });
+    const updateText = (() => {
+        let formattedInput = arraySet.join(", ");
+        textInput.value = formattedInput;
     });
     const generateTable = (() => {
 
