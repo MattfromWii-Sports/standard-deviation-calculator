@@ -14,6 +14,9 @@ const table = (() => {
     });
     const convertArray = ((x) => {
         arraySet = x.split(",");
+        for(let i = 0; i < arraySet.length; i++) { 
+            arraySet[i] = arraySet[i].trim(); //remove whitespaces before & after element
+        }
         if(arraySet[arraySet.length - 1] === "") arraySet.pop(); //remove empty space when "," last
         console.log(arraySet);//
     });
