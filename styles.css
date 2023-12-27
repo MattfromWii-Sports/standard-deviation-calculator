@@ -93,3 +93,9 @@ tfoot, tfoot th {
 tfoot th:nth-of-type(2) {
     background-color: lightgreen;
 }
+
+@media screen and (max-width: 600px){
+    html {
+        font-size: 10px;
+    }
+}
