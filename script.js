@@ -10,12 +10,10 @@ const tableFoot = document.querySelector("tfoot");
 const table = (() => {
     let arraySet = [], input;
     form.addEventListener("submit", (e) => {
-        e.preventDefault;
+        e.preventDefault();
+        resetTable();
         convertArray(textInput.value);
-        if(!isValid()) {
-            resetTable();
-            return;
-        }
+        if(!isValid()) return;
         updateText();
         generateTable();
     });
@@ -43,8 +41,8 @@ const table = (() => {
         let formattedInput = arraySet.join(", ");
         textInput.value = formattedInput;
     };
-    const generateTable = async () => {
-        await resetTable();
+    const generateTable = () => {
+        resetTable();
         let row, head, cell;
         const findMean = (() => {
             let total = 0;
