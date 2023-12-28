@@ -10,22 +10,24 @@ const tableFoot = document.querySelector("tfoot");
 const table = (() => {
     let arraySet = [], input;
     form.addEventListener("submit", (e) => {
-        resetTable();
         e.preventDefault;
         convertArray(textInput.value);
-        if(!isValid()) return;
+        if(!isValid()) {
+            resetTable();
+            return;
+        }
         updateText();
         generateTable();
     });
 
-    const convertArray = ((x) => {
+    const convertArray = (x) => {
         arraySet = x.split(",");
         for(let i = 0; i < arraySet.length; i++) { 
             arraySet[i] = arraySet[i].trim(); //remove whitespaces before & after element
         }
         if(arraySet[arraySet.length - 1] === "") arraySet.pop(); //remove empty space when "," last
-    });
-    const isValid = (() => {
+    };
+    const isValid = () => {
         error.textContent = "";
         if(arraySet.length < 2) {
             error.textContent = "Please add more data :)";
@@ -36,12 +38,13 @@ const table = (() => {
             return false;
         }
         return true;
-    });
-    const updateText = (() => {
+    };
+    const updateText = () => {
         let formattedInput = arraySet.join(", ");
         textInput.value = formattedInput;
-    });
-    const generateTable = (() => {
+    };
+    const generateTable = async () => {
+        await resetTable();
         let row, head, cell;
         const findMean = (() => {
             let total = 0;
@@ -118,8 +121,8 @@ const table = (() => {
             head.textContent = parseFloat(findStandardDeviation(arraySet.length).toFixed(10));
             row.appendChild(head);
         })();
-    });
-    const resetTable = (() => {
+    };
+    const resetTable = () => {
         while(tableHead.firstChild) {
             tableHead.removeChild(tableHead.lastChild);
         }
@@ -129,5 +132,5 @@ const table = (() => {
         while(tableFoot.firstChild) {
             tableFoot.removeChild(tableFoot.lastChild);
         }
-    });
+    };
 })();
